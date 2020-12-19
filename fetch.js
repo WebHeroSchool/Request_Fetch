@@ -11,13 +11,13 @@ fetch(`https://api.github.com/users/${userName}`)
 
 	.then(json => {
 		console.log(json);
-		const img = document.createElement('img');
+		let img = document.createElement('img');
 		img.src = json.avatar_url;
 		img.alt = 'фото пользователя';
 		document.body.append(img);
-		const div = document.createElement('div');
+		let div = document.createElement('div');
 		document.body.append(div);
-		const name = document.createElement('a');
+		let name = document.createElement('a');
 		if (json.name == null) {
 			name.textContent = 'Имя пользователя недоступно'
 		} else {
@@ -25,7 +25,7 @@ fetch(`https://api.github.com/users/${userName}`)
 			name.href = json.html_url;
 		}
 		div.append(name);
-		const info = document.createElement('p');
+		let info = document.createElement('p');
 		if (json.bio == null) {
 			info.textContent = 'Информация о пользователе недоступна'
 		} else {
