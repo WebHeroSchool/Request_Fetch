@@ -5,7 +5,28 @@ if (userName == undefined) {
 	userName = 'r-s-n';
 }
 
-fetch(`https://api.github.com/users/${userName}`)
+let cssloadDots = document.getElementById('cssloadDots');
+
+let load = function () {
+	cssloadDots.style.display = 'none';
+}
+
+let getDate = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		load();
+		let data = document.createElement('div');
+		data.textContent = `Текущая дата: ${Date()}`;
+		document.body.append(data);
+		resolve();
+	}, 4000);
+});
+
+let getName = new Promise((resolve, reject) => {
+	setTimeout(() => userName ? resolve(userName) : reject('имя не найдено'), 2000);
+});
+
+Promise.all([getDate, getName])
+	.then(() => fetch(`https://api.github.com/users/${userName}`))
 
 	.then(res => res.json())
 
